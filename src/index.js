@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {Comonent} from 'react';
 import ReactDOM from 'react-dom';
-import { stuff } from './components/TodoComponents/Todo'
-import TodoList from './components/TodoComponents/TodoList'
-import TodoForm from './components/TodoComponents/TodoForm'
+
+import { stuff } from './components/Todo'
+import './App.css'
+
+import TodoList from './components/TodoList'
+import TodoForm from './components/TodoForm'
+
+
 class App extends React.Component {
     constructor() {
         super()
@@ -22,14 +27,25 @@ class App extends React.Component {
                 }
                 return item;
             })
-        })
+        });
     }
+
+    addItem = itemText => {
+const newItem = {
+    task: itemText,
+completed: false,
+id: Date.now()
+    };
+    this.setState({
+        stuff: [...this.state.stuff, newItem]
+    });
+};
     render() {
         return (
             <div className='App'>
                 <div className='header'>
                     <h1>My Todo List</h1>
-                    <TodoForm />
+                    <TodoForm addItem = {this.addItem}/>
 
                 </div>
                 <TodoList 
